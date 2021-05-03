@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="GenericCRUD.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:GenericCRUD.ViewModels;assembly=GenericCRUD.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=True}"
+        Height="680" Width="796" Background="#f7f9fa">
+
+    <DockPanel>
+        <Menu x:Name="MainMenu" DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem x:Name="MiNewFile"
+                          Header="New"
+                          InputGestureText="Ctrl+N" />
+                
+                <MenuItem x:Name="MiOpenFile" 
+                          Header="Open" 
+                          InputGestureText="Ctrl+O"/>
+                
+                <Separator/>
+                
+                <MenuItem x:Name="MiSaveFile" 
+                          Header="Save" 
+                          InputGestureText="Ctrl+S"/>
+                
+                <MenuItem x:Name="MiSaveFileAs" 
+                          Header="Save As..." 
+                          InputGestureText="Ctrl+Shift+S"/>
+                
+                <Separator/>
+                
+                <MenuItem x:Name="MiExit" 
+                          Header="Exit" 
+                          InputGestureText="Ctrl+X" />
+            </MenuItem>
+            
+            <MenuItem Header="Help">
+                <MenuItem x:Name="MiAbout" 
+                          Header="About" />
+            </MenuItem>
+        </Menu>
+
+        <StackPanel Orientation="Vertical" Margin="0 8"
+                    VerticalAlignment="Stretch">
+            <Grid Margin="16 0" Height="46">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="TbxEmployeeName" 
+                         Grid.Column="0" 
+                         Height="30"
+                         VerticalContentAlignment="Center">
+                    <TextBox.ToolTip>
+                        <TextBlock Text="Search employee by name" />
+                    </TextBox.ToolTip>
+                </TextBox>
+
+                <Button x:Name="BtnSearchEmployee" 
+                        Grid.Column="1"
+                        Height="30"
+                        Margin="8 0 0 0"
+                        Content="Search"
+                        IsEnabled="False" />
+
+                <Button x:Name="BtnAddEmployee" 
+                        Grid.Column="3"
+                        Content="Add"
+                        Height="30" />
+            </Grid>
+
+            <Grid Margin="16 0" Height="46">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="5*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BtnEditEmployee" 
+                        Grid.Column="0" 
+                        Height="30" 
+                        Margin="0 0 4 0"
+                        Content="Edit"
+                        IsEnabled="False" />
+
+                <Button x:Name="BtnRemoveEmployee"  
+                        Grid.Column="1" 
+                        Height="30" 
+                        Margin="4 0 0 0" 
+                        Content="Remove"
+                        IsEnabled="False" />
+                
+                <TextBlock x:Name="TbkSelectionWarning"
+                           Grid.Column="2" 
+                           Margin="8 0 0 0"
+                           Text="* Select employee in the table"
+                           VerticalAlignment="Center" />
+            </Grid>
+
+            <Grid Margin="16 8 16 0" Height="538">
+                <DataGrid x:Name="DgdEmployees"
+                          AutoGenerateColumns="False"
+                          VerticalScrollBarVisibility="Auto" />
+            </Grid>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

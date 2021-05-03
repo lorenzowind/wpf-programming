@@ -3,11 +3,11 @@
 namespace GenericCRUD.Views
 {
     /// <summary>
-    /// Lógica interna para MainView.xaml
+    /// Interaction logic for SaveEmployeeView.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class SaveEmployeeView : Window
     {
-        public MainView()
+        public SaveEmployeeView()
         {
             InitializeComponent();
         }
