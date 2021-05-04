@@ -11,6 +11,7 @@ namespace GenericCRUD.ViewModels
         #region AboutMethods
         public void BtnClose()
         {
+            TryClose();
         }
         #endregion
     }

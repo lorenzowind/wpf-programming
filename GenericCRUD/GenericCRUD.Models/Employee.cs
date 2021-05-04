@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 namespace GenericCRUD.Models
 {
     [Serializable]
-    class Employee : INotifyPropertyChanged
+    public class Employee : INotifyPropertyChanged
     {
         private string _name;
         private string _email;

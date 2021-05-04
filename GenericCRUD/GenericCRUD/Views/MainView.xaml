@@ -103,9 +103,33 @@
             </Grid>
 
             <Grid Margin="16 8 16 0" Height="538">
-                <DataGrid x:Name="DgdEmployees"
+                <DataGrid ItemsSource="{Binding CurrentDataTable}"
                           AutoGenerateColumns="False"
-                          VerticalScrollBarVisibility="Auto" />
+                          GridLinesVisibility="None"
+                          VerticalScrollBarVisibility="Auto"
+                          IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" 
+                                            Width="3*"
+                                            Binding="{Binding Name}" />
+                        
+                        <DataGridTextColumn Header="E-mail" 
+                                            Width="3*" 
+                                            Binding="{Binding Email}" />
+                        
+                        <DataGridTextColumn Header="Phone Number" 
+                                            Width="2*" 
+                                            Binding="{Binding PhoneNumber}" />
+                       
+                        <DataGridTextColumn Header="Birth Date"
+                                            Width="2*" 
+                                            Binding="{Binding BirthDate}" />
+
+                        <DataGridTextColumn Header="Role" 
+                                            Width="3*" 
+                                            Binding="{Binding Role}" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </StackPanel>
     </DockPanel>

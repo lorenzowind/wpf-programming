@@ -11,6 +11,7 @@ namespace GenericCRUD.ViewModels
         #region SaveEmployeeMethods
         public void BtnCancel()
         {
+            TryClose();
         }
 
         public void BtnSaveEmployee()

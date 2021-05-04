@@ -1,4 +1,5 @@
 ﻿<Window x:Class="GenericCRUD.Views.SaveEmployeeView"
+        WindowStartupLocation="CenterScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -30,6 +31,7 @@
                            Text="Name" />
 
                 <TextBox x:Name="TbxEmployeeName"
+                         VerticalContentAlignment="Center"
                          Height="30">
                     <TextBox.ToolTip>
                         <TextBlock Text="Type employee's name" />
@@ -43,6 +45,7 @@
                            Text="E-mail" />
 
                 <TextBox x:Name="TbxEmployeeEmail"
+                         VerticalContentAlignment="Center"
                          Height="30">
                     <TextBox.ToolTip>
                         <TextBlock Text="Type employee's e-mail" />
@@ -70,6 +73,7 @@
                            Text="Birth Date" />
 
                 <TextBox x:Name="TbxEmployeeBirthDate"
+                         VerticalContentAlignment="Center"
                          Height="30">
                     <TextBox.ToolTip>
                         <TextBlock Text="Type employee's birth date" />
@@ -83,7 +87,8 @@
                            Text="Role" />
 
                 <ComboBox x:Name="CbxEmployeeRole"
-                         Height="30"
+                          VerticalContentAlignment="Center"
+                          Height="30"
                           SelectedIndex="0">
                     <ComboBoxItem Content="Select employee role" />
                 </ComboBox>
