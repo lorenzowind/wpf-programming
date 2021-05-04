@@ -4,11 +4,7 @@ namespace GenericCRUD.ViewModels
 {
     public class ShellViewModel : Conductor<object>
     {
-        public ShellViewModel()
-        {
-            CurrentViewModel = IoC.Get<MainViewModel>();
-        }
-
+        #region Properties
         private object _currentViewModel;
 
         public object CurrentViewModel
@@ -20,10 +16,20 @@ namespace GenericCRUD.ViewModels
                 NotifyOfPropertyChange();
             }
         }
+        #endregion
 
+        #region Constructors
+        public ShellViewModel()
+        {
+            CurrentViewModel = IoC.Get<MainViewModel>();
+        }
+        #endregion
+
+        #region Helpers
         protected override void OnInitialize()
         {
             ActivateItem(CurrentViewModel);
         }
+        #endregion
     }
 }

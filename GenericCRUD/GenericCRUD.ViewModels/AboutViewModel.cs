@@ -4,11 +4,13 @@ namespace GenericCRUD.ViewModels
 {
     public class AboutViewModel : Screen
     {
+        #region Constructors
         public AboutViewModel()
         {
         }
+        #endregion
 
-        #region AboutMethods
+        #region ViewHandlers
         public void BtnClose()
         {
             TryClose();

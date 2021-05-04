@@ -2,17 +2,41 @@
 using System;
 using GenericCRUD.Models;
 using System.Data;
-using Microsoft.Win32;
+using System.ComponentModel;
 
 namespace GenericCRUD.ViewModels
 {
-    public class MainViewModel : Screen
+    public class MainViewModel : INotifyPropertyChanged
     {
+        #region Properties
         private readonly IDialogService _dialogService;
         private readonly IWindowManager _windowManager;
 
         private readonly Persistence _employees = new Persistence();
 
+        private DataTable _currentDataTable;
+
+        public DataTable CurrentDataTable
+        {
+            get
+            {
+                return _currentDataTable;
+            }
+            set
+            {
+                _currentDataTable = value;
+                NotifyPropertyChanged("CurrentDataTable");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        #region Constructors
         public MainViewModel()
         {
         }
@@ -24,8 +48,9 @@ namespace GenericCRUD.ViewModels
 
             CurrentDataTable = GetDataTable();
         }
-        public DataTable CurrentDataTable { get; set; }
+        #endregion
 
+        #region Helpers
         private DataTable GetDataTable()
         {
             DataTable dataTable = new DataTable();
@@ -36,44 +61,47 @@ namespace GenericCRUD.ViewModels
             dataTable.Columns.Add("BirthDate", typeof(string));
             dataTable.Columns.Add("Role", typeof(string));
 
-            foreach (Employee item in _employees._list)
+            foreach (Employee item in _employees.List)
             {
                 dataTable.Rows.Add(item.Name, item.Email, item.PhoneNumber, item.BirthDate, item.Role);
             }
 
             return dataTable;
         }
+        #endregion
 
-        #region MenuMethods
+        #region MenuItemsHandlers
         public void MiNewFile()
         {
+            _employees.ClearList();
+
+            _employees.ClearFileName();
+
+            CurrentDataTable = GetDataTable();
         }
 
         public async void MiOpenFile()
         {
-            DialogResult dialog = _dialogService.OpenFileDialog();
+            await _employees.LoadFile(_dialogService.OpenFileDialog(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)));
 
-            if (dialog.Result == true)
-            {
-                await _employees.LoadFile(dialog.FileName);
-            }
+            CurrentDataTable = GetDataTable();
         }
 
         public async void MiSaveFile()
         {
-            if (_employees.SaveFileDialog != null)
+            if (_employees.Filename != "")
             {
                 await _employees.SaveFile();
             } 
             else
             {
-                await _employees.SaveFileAs();
+                MiSaveFileAs();
             }
         }
 
         public async void MiSaveFileAs()
         {
-            await _employees.SaveFileAs();
+            await _employees.SaveFileAs(_dialogService.SaveFileDialog("Text file(*.json)|*.json", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)));
         }
 
         public void MiExit()
@@ -87,7 +115,7 @@ namespace GenericCRUD.ViewModels
         }
         #endregion
 
-        #region EmployeeMethods
+        #region ViewHandlers
         public void BtnSearchEmployee()
         {
         }
@@ -99,10 +127,12 @@ namespace GenericCRUD.ViewModels
 
         public void BtnEditEmployee()
         {
+            _windowManager.ShowDialog(new SaveEmployeeViewModel());
         }
 
         public void BtnRemoveEmployee()
         {
+            _windowManager.ShowDialog(new RemoveEmployeeViewModel());
         }
         #endregion
     }

@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using Microsoft.Win32;
 using GenericCRUD.ViewModels;
 
@@ -8,23 +6,25 @@ namespace GenericCRUD.Views
 {
     public class DialogService : IDialogService
     {
-        public DialogResult SaveFileDialog()
+        public SaveFileDialog SaveFileDialog(string filter, string initialDirectory)
         {
-            var sfd = new SaveFileDialog();
-            var result = sfd.ShowDialog();
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = filter,
+                InitialDirectory = initialDirectory
+            };
 
-            return new DialogResult(result, result == true ? sfd.FileName : null);
+            return saveFileDialog.ShowDialog() == true ? saveFileDialog : null;
         }
 
-        public DialogResult OpenFileDialog()
+        public OpenFileDialog OpenFileDialog(string initialDirectory)
         {
-            var ofd = new OpenFileDialog
+            OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                InitialDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+                InitialDirectory = initialDirectory
             };
-            var result = ofd.ShowDialog();
 
-            return new DialogResult(result, result == true ? ofd.FileName : null);
+            return openFileDialog.ShowDialog() == true ? openFileDialog : null;
         }
 
         public void OpenInfoWindow(string caption, string text)

@@ -1,9 +1,13 @@
-﻿namespace GenericCRUD.ViewModels
+﻿using Microsoft.Win32;
+
+namespace GenericCRUD.ViewModels
 {
     public interface IDialogService
     {
-        DialogResult SaveFileDialog();
-        DialogResult OpenFileDialog();
+        #region Methods
+        SaveFileDialog SaveFileDialog(string filter, string initialDirectory);
+        OpenFileDialog OpenFileDialog(string initialDirectory);
         void OpenInfoWindow(string caption, string text);
+        #endregion
     }
 }

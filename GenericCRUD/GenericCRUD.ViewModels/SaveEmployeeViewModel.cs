@@ -4,11 +4,13 @@ namespace GenericCRUD.ViewModels
 {
     public class SaveEmployeeViewModel : Screen
     {
+        #region Constructors
         public SaveEmployeeViewModel()
         {
         }
+        #endregion
 
-        #region SaveEmployeeMethods
+        #region ViewHandlers
         public void BtnCancel()
         {
             TryClose();

@@ -4,11 +4,13 @@ namespace GenericCRUD.ViewModels
 {
     public class RemoveEmployeeViewModel : Screen
     {
+        #region Constructors
         public RemoveEmployeeViewModel()
         {
         }
+        #endregion
 
-        #region RemoveEmployeeMethods
+        #region ViewHandlers
         public void BtnCancel()
         {
         }
