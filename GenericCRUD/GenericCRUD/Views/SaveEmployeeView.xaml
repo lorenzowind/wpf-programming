@@ -32,6 +32,8 @@
 
                 <TextBox x:Name="TbxEmployeeName"
                          VerticalContentAlignment="Center"
+                         Text="{Binding CurrentEmployee.Name, Mode=TwoWay, 
+                                UpdateSourceTrigger=PropertyChanged}"
                          Height="30">
                     <TextBox.ToolTip>
                         <TextBlock Text="Type employee's name" />
@@ -46,6 +48,8 @@
 
                 <TextBox x:Name="TbxEmployeeEmail"
                          VerticalContentAlignment="Center"
+                         Text="{Binding CurrentEmployee.Email, Mode=TwoWay, 
+                                UpdateSourceTrigger=PropertyChanged}"
                          Height="30">
                     <TextBox.ToolTip>
                         <TextBlock Text="Type employee's e-mail" />
@@ -60,6 +64,8 @@
 
                 <TextBox x:Name="TbxEmployeePhoneNumber"
                          Height="30"
+                         Text="{Binding CurrentEmployee.PhoneNumber, Mode=TwoWay, 
+                                UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center">
                     <TextBox.ToolTip>
                         <TextBlock Text="Type employee's phone number" />
@@ -74,6 +80,8 @@
 
                 <TextBox x:Name="TbxEmployeeBirthDate"
                          VerticalContentAlignment="Center"
+                         Text="{Binding CurrentEmployee.BirthDate, Mode=TwoWay, 
+                                UpdateSourceTrigger=PropertyChanged}"
                          Height="30">
                     <TextBox.ToolTip>
                         <TextBlock Text="Type employee's birth date" />
@@ -86,12 +94,15 @@
                 <TextBlock Margin="0 0 0 8"
                            Text="Role" />
 
-                <ComboBox x:Name="CbxEmployeeRole"
-                          VerticalContentAlignment="Center"
-                          Height="30"
-                          SelectedIndex="0">
-                    <ComboBoxItem Content="Select employee role" />
-                </ComboBox>
+                <TextBox x:Name="TbxEmployeeRole"
+                         VerticalContentAlignment="Center"
+                         Text="{Binding CurrentEmployee.Role, Mode=TwoWay, 
+                                UpdateSourceTrigger=PropertyChanged}"
+                         Height="30">
+                    <TextBox.ToolTip>
+                        <TextBlock Text="Type employee's role" />
+                    </TextBox.ToolTip>
+                </TextBox>
             </StackPanel>
         </Grid>
 
@@ -112,8 +123,8 @@
                     Grid.Column="2" 
                     Height="30" 
                     Margin="4 0 0 0"
-                    Content="Add"
-                    IsEnabled="False" />
+                    Content="{Binding BtnSaveEmployeeContent}"
+                    IsEnabled="{Binding BtnSaveEmployeeIsEnabled}" />
         </Grid>
     </Grid>
 </Window>

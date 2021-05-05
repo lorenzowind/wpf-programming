@@ -38,8 +38,7 @@
                     Grid.Column="2" 
                     Height="30" 
                     Margin="4 0 0 0"
-                    Content="Remove"
-                    IsEnabled="False" />
+                    Content="Remove" />
         </Grid>
     </Grid>
 </Window>

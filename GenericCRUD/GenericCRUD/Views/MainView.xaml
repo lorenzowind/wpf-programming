@@ -86,19 +86,19 @@
                         Height="30" 
                         Margin="0 0 4 0"
                         Content="Edit"
-                        IsEnabled="False" />
+                        IsEnabled="{Binding BtnEditEmployeeIsEnabled}"  />
 
                 <Button x:Name="BtnRemoveEmployee"  
                         Grid.Column="1" 
                         Height="30" 
                         Margin="4 0 0 0" 
                         Content="Remove"
-                        IsEnabled="False" />
+                        IsEnabled="{Binding BtnRemoveEmployeeIsEnabled}" />
                 
                 <TextBlock x:Name="TbkSelectionWarning"
                            Grid.Column="2" 
                            Margin="8 0 0 0"
-                           Text="* Select employee in the table"
+                           Text="{Binding TbkSelectionWarning}"
                            VerticalAlignment="Center" />
             </Grid>
 
@@ -107,8 +107,15 @@
                           AutoGenerateColumns="False"
                           GridLinesVisibility="None"
                           VerticalScrollBarVisibility="Auto"
+                          SelectedItem="{Binding CurrentSelectedRow, Mode=TwoWay}"
+                          SelectionMode="Single"
                           IsReadOnly="True">
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" 
+                                            Width="*"
+                                            Visibility="Collapsed"
+                                            Binding="{Binding Id}" />
+                        
                         <DataGridTextColumn Header="Name" 
                                             Width="3*"
                                             Binding="{Binding Name}" />

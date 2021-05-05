@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace GenericCRUD.Models
 {
     public class Persistence
     {
+        #region Properties
         private List<Employee> _list = new List<Employee>();
 
         public List<Employee> List
@@ -18,22 +20,39 @@ namespace GenericCRUD.Models
             }
         }
 
+        private string _filename;
+
+        public string Filename
+        {
+            get { return _filename; }
+        }
+        #endregion
+
+        #region Constructors
         public Persistence()
         {
         }
+        #endregion
 
+        #region Methods
         public void Add(Employee employee)
         {
+            employee.Id = Guid.NewGuid().ToString();
+
             _list.Add(employee);
         }
 
-        public void Save(Employee employee, int index)
+        public void Save(Employee employee)
         {
+            int index = _list.FindIndex(item => item.Id == employee.Id);
+
             _list[index] = employee;
         }
 
-        public void Remove(int index)
+        public void Remove(Employee employee)
         {
+            int index = _list.FindIndex(item => item.Id == employee.Id);
+
             _list.RemoveAt(index);
         }
 
@@ -41,17 +60,10 @@ namespace GenericCRUD.Models
         {
             _list.Clear();
         }
-        
-        private string _filename;
-
-        public string Filename
-        {
-            get { return _filename; }
-        }
 
         public void ClearFileName()
         {
-            _filename = "";
+            _filename = null;
         }
 
         public async Task SaveFileAs(SaveFileDialog saveFileDialog)
@@ -79,4 +91,5 @@ namespace GenericCRUD.Models
             }
         }
     }
+    #endregion
 }

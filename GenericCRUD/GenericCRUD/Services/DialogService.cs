@@ -6,6 +6,7 @@ namespace GenericCRUD.Views
 {
     public class DialogService : IDialogService
     {
+        #region Methods
         public SaveFileDialog SaveFileDialog(string filter, string initialDirectory)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
@@ -31,5 +32,6 @@ namespace GenericCRUD.Views
         {
             MessageBox.Show(text, caption, MessageBoxButton.OK, MessageBoxImage.Information);
         }
+        #endregion
     }
 }

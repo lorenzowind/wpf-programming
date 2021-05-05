@@ -8,26 +8,25 @@ namespace GenericCRUD.Models
     [Serializable]
     public class Employee : INotifyPropertyChanged
     {
+        #region Properties
+        private string _id;
         private string _name;
         private string _email;
         private string _phoneNumber;
         private string _birthDate;
         private string _role;
-        
-        public Employee()
+
+        public string Id
         {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
         }
 
-        public Employee(string name, string email, string phoneNumber, string birthDate, string role)
-        {
-            this._name = name;
-            this._email = email;
-            this._phoneNumber = phoneNumber;
-            this._birthDate = birthDate;
-            this._role = role;
-        }
-
-        public string Name 
+        public string Name
         {
             get { return _name; }
             set
@@ -78,11 +77,30 @@ namespace GenericCRUD.Models
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
+        #region Constructors
+        public Employee()
+        {
+        }
+
+        public Employee(string id, string name, string email, string phoneNumber, string birthDate, string role)
+        {
+            this._id = id;
+            this._name = name;
+            this._email = email;
+            this._phoneNumber = phoneNumber;
+            this._birthDate = birthDate;
+            this._role = role;
+        }
+        #endregion
+
+        #region Methods
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        #endregion
     }
 }
