@@ -16,9 +16,37 @@ namespace GenericCRUD.ViewModels
 
         private DataRowView _currentSelectedRow;
 
+        public string _title;
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                OnPropertyChanged();
+            }
+        }
+
         public bool BtnEditEmployeeIsEnabled => IsRowSelected();
         public bool BtnRemoveEmployeeIsEnabled => IsRowSelected();
         public string TbkSelectionWarning => IsRowSelected() ? "" : "* Select employee in the table";
+        public bool BtnSearchEmployeeIsEnabled => TbxEmployeeName != string.Empty && TbxEmployeeName != null;
+
+        private string _tbxEmployeeName;
+        public string TbxEmployeeName
+        {
+            get => _tbxEmployeeName;
+            set
+            {
+                _tbxEmployeeName = value;
+                OnPropertyChanged("BtnSearchEmployeeIsEnabled");
+
+                if (_tbxEmployeeName == "")
+                {
+                    BtnSearchEmployee();
+                }
+            }
+        }
 
         public DataRowView CurrentSelectedRow
         {
@@ -27,7 +55,6 @@ namespace GenericCRUD.ViewModels
             {
                 _currentSelectedRow = value;
                 OnPropertyChanged();
-
                 OnPropertyChanged("BtnEditEmployeeIsEnabled");
                 OnPropertyChanged("BtnRemoveEmployeeIsEnabled");
                 OnPropertyChanged("TbkSelectionWarning");
@@ -63,6 +90,7 @@ namespace GenericCRUD.ViewModels
             _windowManager = windowManager;
 
             CurrentDataTable = GetDataTable();
+            Title = "Generic CRUD";
         }
         #endregion
 
@@ -80,7 +108,17 @@ namespace GenericCRUD.ViewModels
 
             foreach (Employee item in _employees.List)
             {
-                dataTable.Rows.Add(item.Id, item.Name, item.Email, item.PhoneNumber, item.BirthDate, item.Role);
+                if (TbxEmployeeName != string.Empty && TbxEmployeeName != null)
+                {
+                    if (item.Name.Contains(_tbxEmployeeName))
+                    {
+                        dataTable.Rows.Add(item.Id, item.Name, item.Email, item.PhoneNumber, item.BirthDate, item.Role);
+                    }
+                } 
+                else
+                {
+                    dataTable.Rows.Add(item.Id, item.Name, item.Email, item.PhoneNumber, item.BirthDate, item.Role);
+                }
             }
 
             return dataTable;
@@ -159,7 +197,7 @@ namespace GenericCRUD.ViewModels
         #region ViewHandlers
         public void BtnSearchEmployee()
         {
-
+            CurrentDataTable = GetDataTable();
         }
 
         public void BtnAddEmployee()

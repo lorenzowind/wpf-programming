@@ -35,7 +35,7 @@
                           Header="Exit" 
                           InputGestureText="Ctrl+X" />
             </MenuItem>
-            
+
             <MenuItem Header="Help">
                 <MenuItem x:Name="MiAbout" 
                           Header="About" />
@@ -55,6 +55,8 @@
                 <TextBox x:Name="TbxEmployeeName" 
                          Grid.Column="0" 
                          Height="30"
+                         Text="{Binding TbxEmployeeName, Mode=TwoWay, 
+                                UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center">
                     <TextBox.ToolTip>
                         <TextBlock Text="Search employee by name" />
@@ -66,7 +68,7 @@
                         Height="30"
                         Margin="8 0 0 0"
                         Content="Search"
-                        IsEnabled="False" />
+                        IsEnabled="{Binding BtnSearchEmployeeIsEnabled}"  />
 
                 <Button x:Name="BtnAddEmployee" 
                         Grid.Column="3"
